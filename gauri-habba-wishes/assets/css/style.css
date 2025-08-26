@@ -1,0 +1,151 @@
+
+:root{
+  --bg:#05060b;
+  --soft:#cfe5ff;
+  --glass: rgba(255,255,255,.06);
+  --glass-b: rgba(255,255,255,.25);
+  --g1:#ff6ec7;
+  --g2:#ffd166;
+  --g3:#7bdcb5;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto;
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #1a1036 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(1100px 700px at 110% 20%, #0c2f30 0%, rgba(0,0,0,0) 70%),
+    var(--bg);
+  color:#fff;
+  overflow-x:hidden;
+}
+.navbar .nav-link{color:#fff; opacity:.9}
+.navbar .nav-link:hover{opacity:1}
+.bg-blur{
+  backdrop-filter:saturate(160%) blur(10px);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0));
+  border-bottom:1px solid rgba(255,255,255,.15);
+}
+.text-soft{color:var(--soft)}
+
+.text-gradient{
+  background:linear-gradient(90deg,var(--g2),var(--g1),var(--g3));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 0 24px rgba(255,255,255,.15);
+}
+.fw-black{font-weight:900}
+
+/* Aurora glow layer */
+.aurora{
+  position:fixed; inset:0; pointer-events:none; z-index:-3;
+  background:
+    radial-gradient(50% 35% at 20% 15%, rgba(255,110,199,.15), transparent 60%),
+    radial-gradient(50% 40% at 80% 25%, rgba(123,220,181,.12), transparent 60%),
+    radial-gradient(60% 45% at 50% 85%, rgba(255,209,102,.15), transparent 70%);
+  mix-blend-mode:screen; animation:aurora 14s infinite alternate ease-in-out;
+}
+@keyframes aurora{ 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(30deg)} }
+
+/* Petal rain */
+#petals{ position:fixed; inset:0; pointer-events:none; z-index:-2; }
+.petal{ position:absolute; width:22px; height:14px;
+  background:radial-gradient(circle at 30% 30%, #ffc4ec 0%, #ff6ec7 75%);
+  border-radius:60% 60% 60% 60% / 80% 80% 20% 20%;
+  opacity:.6; filter:blur(.3px); animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{ transform:translateY(-10vh) rotate(0deg) }
+  100%{ transform:translateY(110vh) rotate(360deg) }
+}
+
+/* Hero slideshow using user's images */
+.hero{ position:relative; padding-top:5rem; }
+.slideshow{ position:relative; aspect-ratio: 16 / 9; overflow:hidden; }
+.slide{
+  position:absolute; inset:0; object-fit:cover; width:100%; height:100%;
+  transform-origin: center;
+  opacity:0; animation:slideFade 32s infinite;
+}
+.slide:nth-child(1){ animation-delay: 0s }
+.slide:nth-child(2){ animation-delay: 8s }
+.slide:nth-child(3){ animation-delay: 16s }
+.slide:nth-child(4){ animation-delay: 24s }
+@keyframes slideFade{
+  0%{ opacity:0; transform: scale(1) }
+  5%{ opacity:1 }
+  25%{ opacity:1; transform: scale(1.12) }
+  30%{ opacity:0 }
+  100%{ opacity:0 }
+}
+.overlay-gradient{
+  position:absolute; inset:0; background:
+    linear-gradient(to bottom, rgba(0,0,0,.0) 20%, rgba(0,0,0,.45) 65%, rgba(0,0,0,.75));
+}
+
+/* Hero text */
+.hero-content{
+  position:absolute; inset:0; display:grid; place-items:center; padding:1rem;
+}
+.scroll-indicator{ position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); letter-spacing:.3em; font-size:.8rem; opacity:.8 }
+
+/* Lotus deck animation (simple bloom) */
+.lotus-deck{ position:absolute; bottom:-40px; left:0; right:0; display:flex; justify-content:center; gap:16px; pointer-events:none }
+.lotus{
+  width:60px; height:40px; background:radial-gradient(ellipse at center,#ffc4ec 0%,#ff6ec7 70%);
+  border-radius:60% 60% 60% 60% / 80% 80% 20% 20%;
+  filter:blur(.2px); opacity:.75; animation:bloom 3.5s ease-in-out infinite alternate;
+}
+.lotus:nth-child(2){ animation-delay:.3s } .lotus:nth-child(3){ animation-delay:.6s }
+.lotus:nth-child(4){ animation-delay:.9s } .lotus:nth-child(5){ animation-delay:1.2s }
+@keyframes bloom{ from{ transform:scale(.8) } to{ transform:scale(1.1) } }
+
+/* Reusable glass look */
+.glass{
+  background:var(--glass); border:1px solid var(--glass-b);
+  backdrop-filter: blur(10px) saturate(160%); border-radius:1.25rem;
+}
+.section-divider{ position:relative }
+.section-divider::before{
+  content:""; position:absolute; inset:auto 0 100% 0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+}
+
+/* Utility */
+.object-cover{ object-fit:cover }
+.py-6{ padding-top:4rem; padding-bottom:4rem }
+.hover-lift{ transition: transform .35s ease, box-shadow .35s ease }
+.hover-lift:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,.35) }
+
+/* Buttons and toggles */
+.btn{ letter-spacing:.02em }
+#themeToggle{ width:42px; border-radius:999px; }
+
+/* Footer */
+footer{ border-top:1px solid rgba(255,255,255,.1) }
+
+
+/* Light theme toggle */
+:root, :root.light{
+  transition: background-color .4s ease, color .4s ease;
+}
+:root.light body{
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #e6f0ff 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(1100px 700px at 110% 20%, #ffe7f7 0%, rgba(255,255,255,0) 70%),
+    #f8fafc;
+  color:#0a0a0a;
+}
+:root.light .text-soft{ color:#324e6a }
+:root.light .bg-blur{
+  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25));
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+:root.light .glass{
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+:root.light .text-gradient{ text-shadow:none }
+:root.light .slide + .overlay-gradient{
+  background: linear-gradient(to bottom, rgba(255,255,255,.0) 20%, rgba(255,255,255,.7) 90%);
+}
